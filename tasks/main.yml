@@ -1,0 +1,33 @@
+---
+# Firt we install docker and dependencies
+- name : "Install Docker from Jinja2 script"
+  template:
+    src: "docker_install.sh.j2"
+    dest: "/home/{{ ansible_user }}/docker_install.sh"
+
+- name: "Execute Install Script"
+  command: "sh /home/{{ ansible_user }}/docker_install.sh"
+
+# Start Docker service
+- name: "Enable and start Docker"
+  service:
+    name: "docker"
+    enabled: "yes"
+    state: "started"
+  tags:
+    - "docker"
+
+- name: "Create and start pgadmin4 container"
+  docker_container:
+    name: "{{ pgadmin_container_name }}"
+    image: "{{ pgadmin_image_name }}"
+    state: "started"
+    env:
+      PGADMIN_DEFAULT_EMAIL: "{{ postgres_user }}"
+      PGADMIN_DEFAULT_PASSWORD: "{{ postgres_password }}"
+      PGADMIN_LISTEN_PORT: "{{ pgadmin_listen_port }}"
+      # PGADMIN_SERVER_JSON_FILE: "/pgadmin4/servers.json"
+    ports:
+      - "{{ pgadmin_port }}:{{ pgadmin_listen_port }}"
+    volumes:
+      - "pgadmin4Data:/var/lib/pgadmin"

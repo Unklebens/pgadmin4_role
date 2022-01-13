@@ -1,0 +1,20 @@
+---
+# Default settings for ansible
+user: "{{ ansible_user}}"
+password: "{{ ansible_vault_password }}"
+
+# Default settings for pgadmin4_role
+pgadmin_image_name: "dpage/pgadmin4"
+pgadmin_container_name: "pgadmin4"
+pgadmin_network: "pgadmin4"
+pgadmin_listen_port: "80"
+pgadmin_port: "8080"
+pgadmin_email: "pgadmin@pgadmin"
+
+# Postgres pgAdmin settings
+postgres_container_name: "postgres"
+postgres_image_name: "postgres"
+postgres_port: "5432"
+postgres_db: "db_pgadmin"
+postgres_user: "pgadmin@pgadmin.com"
+postgres_password: "pgadmin_pass"
