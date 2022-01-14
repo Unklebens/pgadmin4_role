@@ -1,16 +1,12 @@
 ---
 # handlers file for pgadmin4_role
-- name: "reload systemd"
+- name: "Reload systemd"
   systemd:
     daemon_reload: "yes"
+  become: true
 
-- name: "restart docker"
+- name: "Restart docker"
   systemd:
     name: "docker"
-    state: "restarted"
-
-- name: restart pgadmin4
-  service: 
-    name: "pgadmin4"
     state: "restarted"
   become: true
