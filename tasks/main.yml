@@ -1,22 +1,4 @@
 ---
-# Firt we install docker and dependencies
-- name : "Install Docker from Jinja2 script"
-  template:
-    src: "docker_install.sh.j2"
-    dest: "/home/{{ ansible_user }}/docker_install.sh"
-
-- name: "Execute Install Script"
-  command: "sh /home/{{ ansible_user }}/docker_install.sh"
-
-# Start Docker service
-- name: "Enable and start Docker"
-  service:
-    name: "docker"
-    enabled: "yes"
-    state: "started"
-  tags:
-    - "docker"
-
 # Create pgadmin4 container
 - name: "Create and start pgadmin4 container"
   docker_container:
