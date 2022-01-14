@@ -9,7 +9,7 @@
     src: "docker-compose.yml.j2"
     dest: "/home/{{ ansible_user }}/docker-compose.yml"
 
-- name: "docker compose odoo up -d"
+- name: "docker compose pgadmin4 up -d"
   command: "docker-compose up -d"
   args:
     chdir: "/home/{{ ansible_user }}"
